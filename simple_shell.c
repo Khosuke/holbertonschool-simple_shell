@@ -32,15 +32,19 @@ int main(int ac, char *av[])
 				if (buffer[read - 1] == '\n')
 					buffer[read - 1] = '\0';
 				av = split_string(buffer, " ");
-				commandPath = _which(av[0]);
+				if (av[0][0] != '/')
+					commandPath = _which(av[0]);
+				else
+					commandPath = av[0];
 				if (strcmp(av[0], "exit") == 0)
 				{
 					free(buffer);
-					free_array_string(av);
+					free_array(av);
+					free(commandPath);
 					kill(child, 15);
 				}
 				if (execve(commandPath, av, environ) == -1)
-					perror("Error:");
+					perror("Error");
 			}
 			else
 				wait(&status);

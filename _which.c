@@ -19,13 +19,17 @@ char *_which(char *commandName)
 		len = (strlen(path_dir[j]) + strlen(commandName));
 		filepath = strdup(path_dir[j]);
 		filepath = realloc(filepath, (len + 2) * sizeof(char));
-		filepath = strcat(filepath, "/");
-		filepath = strcat(filepath, commandName);
+		strcat(filepath, "/");
+		strcat(filepath, commandName);
 		if (stat(filepath, &st) == 0)
+		{
+			free(path_copy);
+			free(path_dir);
 			return (filepath);
+		}
 	}
 	free(filepath);
-	free_array_string(path_dir);
+	free_array(path_dir);
 	free(path_copy);
 	return (NULL);
 }

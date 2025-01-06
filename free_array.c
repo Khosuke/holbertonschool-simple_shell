@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * free_array_string - free an array of strings
+ * free_array - free an array of strings
  * @array: the array to free
  */
-void free_array_string(char **array)
+void free_array(char **array)
 {
 	int i = 0;
 

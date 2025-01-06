@@ -9,7 +9,7 @@
  */
 char **split_string(char *buffer, char *separator)
 {
-	int i = 0, j = 0, token_count = 1;
+	int i = 0, j = 0, token_count = 0;
 	char *token, **array_token;
 
 /* count the number of words in the buffer */
@@ -20,7 +20,7 @@ char **split_string(char *buffer, char *separator)
 		i++;
 	}
 /* memory allocation for array_token */
-	array_token = malloc(1 + token_count * sizeof(char *));
+	array_token = malloc((token_count + 1) * sizeof(char *));
 	if (array_token == NULL)
 		return (NULL);
 /* attributing words in the buffer as token value */
@@ -33,7 +33,7 @@ char **split_string(char *buffer, char *separator)
 		{
 			while (j > 0)
 			{
-				free(array_token[j]);
+				free(array_token[j - 1]);
 				j--;
 			}
 			free(array_token);
