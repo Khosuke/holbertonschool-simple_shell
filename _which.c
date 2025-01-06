@@ -25,7 +25,7 @@ char *_which(char *commandName)
 			return (filepath);
 	}
 	free(filepath);
-	free_array_string(path_dir);
+	free_array(path_dir);
 	free(path_copy);
 	return (NULL);
 }

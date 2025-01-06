@@ -36,7 +36,7 @@ int main(int ac, char *av[])
 				if (strcmp(av[0], "exit") == 0)
 				{
 					free(buffer);
-					free_array_string(av);
+					free_array(av);
 					kill(child, 15);
 				}
 				if (execve(commandPath, av, environ) == -1)
