@@ -8,12 +8,12 @@
  */
 int main(int ac, char *av[])
 {
-	(void)ac;
 	size_t size;
 	ssize_t read;
 	pid_t child;
 	int status;
 	char *buffer, *commandPath;
+	(void)ac;
 
 	while (1)
 	{
