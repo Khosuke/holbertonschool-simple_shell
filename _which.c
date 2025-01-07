@@ -24,12 +24,13 @@ char *_which(char *commandName)
 		if (stat(filepath, &st) == 0)
 		{
 			free(path_copy);
-			free(path_dir);
+			free_array(path_dir);
 			return (filepath);
 		}
+		free(filepath);
 	}
+	free(path_copy);
 	free(filepath);
 	free_array(path_dir);
-	free(path_copy);
 	return (NULL);
 }
