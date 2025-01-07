@@ -24,24 +24,21 @@ int simpleshell(void)
 		else
 			commandPath = argv[0];
 		if (strcmp((argv[0]), "exit") == 0)
-			exit(98);
-		if (commandPath != NULL)
 		{
-			child = fork();
-			if (child == -1)
-			{
-				perror("Error:");
-				return (1);
-			}
-			if (child == 0)
-			{
-				if (execve(commandPath, argv, environ) == -1)
-					perror("Error:");
-			}
-			wait(&status);
+			kill(getpid(), 15);
 		}
-		else
-			printf("Command %s does not exist\n", argv[0]);
+		child = fork();
+		if (child == -1)
+		{
+			perror("Error:");
+			return (1);
+		}
+		if (child == 0)
+		{
+			if (execve(commandPath, argv, environ) == -1)
+				perror("Error:");
+		}
+		wait(&status);
 	}
 	free_array(argv);
 	free(buffer);

@@ -33,7 +33,7 @@ char **split_string(char *buffer, char *separator)
 		{
 			while (j > 0)
 			{
-				free(array_token[j]);
+				free(array_token[j - 1]);
 				j--;
 			}
 			free(array_token);
@@ -43,6 +43,5 @@ char **split_string(char *buffer, char *separator)
 		j++;
 	}
 	array_token[j] = NULL;
-
 	return (array_token);
 }
