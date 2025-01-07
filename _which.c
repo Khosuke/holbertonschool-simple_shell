@@ -8,14 +8,19 @@
  */
 char *_which(char *commandName)
 {
-	char *paths = _getenv("PATH"), *path_copy = strdup(paths), *filepath;
-	char **path_dir;
-	int j, len;
+	char *paths = NULL, *path_copy = NULL, *filepath;
+	char **path_dir = NULL;
+	int j = 0, len = 0;
 	struct stat st;
 
+	paths = _getenv("PATH");
+	path_copy = strdup(paths);
+	if (path_copy == NULL)
+		return (NULL);
 	path_dir = split_string(path_copy, ":");
 	for (j = 0; path_dir[j]; j++)
 	{
+		filepath = NULL;
 		len = (strlen(path_dir[j]) + strlen(commandName));
 		filepath = strdup(path_dir[j]);
 		filepath = realloc(filepath, (len + 2) * sizeof(char));
@@ -30,7 +35,6 @@ char *_which(char *commandName)
 		free(filepath);
 	}
 	free(path_copy);
-	free(filepath);
 	free_array(path_dir);
 	return (NULL);
 }

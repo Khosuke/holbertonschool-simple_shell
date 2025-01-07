@@ -2,12 +2,14 @@
 
 /**
  * forkexec - fork and execute command
+ * @commandPath: Path of the command
+ * @cmd: The command
  * Return: Always 0
  */
 int forkexec(char *commandPath, char **cmd)
 {
 	pid_t child;
-	int status;
+	int status = 0;
 
 	child = fork();
 	if (child == -1)
@@ -32,7 +34,7 @@ int shell(void)
 {
 	size_t size;
 	ssize_t read;
-	char *buffer, *commandPath, **cmd;
+	char *buffer = NULL, *commandPath = NULL, **cmd = NULL;
 
 	read = getline(&buffer, &size, stdin);
 	if (read != -1)
@@ -40,31 +42,25 @@ int shell(void)
 		if (buffer[read - 1] == '\n')
 			buffer[read - 1] = '\0';
 		cmd = split_string(buffer, " ");
-		free(buffer);
 		if (cmd[0][0] != '/')
 			commandPath = _which(cmd[0]);
 		else
 			commandPath = cmd[0];
 		if (strcmp(cmd[0], "exit") == 0)
 		{
+			free(buffer);
 			free_array(cmd);
 			free(commandPath);
 			exit(99);
 		}
 		if (commandPath != NULL)
-		{
 			forkexec(commandPath, cmd);
-			free(commandPath);
-		}
 		else
-		{
-			free(commandPath);
 			perror("Error");
-		}
 	}
-	free_array(cmd);
-	free(commandPath);
 	free(buffer);
+	free(commandPath);
+	free_array(cmd);
 	return (0);
 }
 
@@ -79,7 +75,7 @@ int main(void)
 	else
 		while (1)
 		{
-			printf("simple_shell $ ");
+			printf("Simple Shell $ ");
 			shell();
 		}
 	return (0);

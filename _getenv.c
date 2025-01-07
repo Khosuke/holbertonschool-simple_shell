@@ -7,7 +7,7 @@
  */
 char *_getenv(const char *name)
 {
-	char *token_env, *dupEnviron;
+	char *token_env = NULL, *dupEnviron = NULL;
 	int i;
 
 	for (i = 0; environ[i]; i++)
@@ -22,5 +22,6 @@ char *_getenv(const char *name)
 		}
 		free(dupEnviron);
 	}
+	free(token_env);
 	return (NULL);
 }
