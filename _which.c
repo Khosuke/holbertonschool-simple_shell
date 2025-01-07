@@ -46,3 +46,4 @@ char *_which(char *commandName)
 	free_array(path_dir);
 	return (NULL);
 }
+
