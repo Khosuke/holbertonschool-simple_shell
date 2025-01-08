@@ -44,7 +44,7 @@ int checkCommand(char *buffer, char **av)
 	if (cmd == NULL)
 	{
 		free(buffer);
-		return (0);
+		return (1);
 	}
 	if (cmd[0][0] != '/')
 		commandPath = _which(cmd[0]);
@@ -54,7 +54,7 @@ int checkCommand(char *buffer, char **av)
 	{
 		free(buffer);
 		free_array(cmd);
-		exit(99);
+		exit(0);
 	}
 	if (commandPath != NULL)
 	{
@@ -65,7 +65,7 @@ int checkCommand(char *buffer, char **av)
 	else
 		fprintf(stderr, "%s: 1: %s: not found\n", *av, *cmd);
 	free_array(cmd);
-	return (1);
+	return (0);
 }
 
 
@@ -88,7 +88,7 @@ int shell(char **av)
 		if (*buffer == '\0' || strcmp(buffer, " ") == 0)
 		{
 			free(buffer);
-			return (1);
+			return (0);
 		}
 		checkCommand(buffer, av);
 	}
@@ -96,10 +96,10 @@ int shell(char **av)
 	{
 		free(buffer);
 		printf("\n");
-		exit(99);
+		exit(0);
 	}
 	free(buffer);
-	return (1);
+	return (0);
 }
 
 /**
@@ -124,7 +124,7 @@ int main(int ac, char **av)
 		printf("Simple Shell $ ");
 		fflush(stdout);
 		status = shell(av);
-		if (status != 1)
+		if (status != 0)
 			break;
 	}
 	return (0);
