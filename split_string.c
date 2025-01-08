@@ -21,7 +21,7 @@ char **split_string(char *buffer, char *separator)
 			token_count++;
 		i++;
 	}
-	array_token = malloc((token_count + 1) * sizeof(char *));
+	array_token = malloc((token_count + 2) * sizeof(char *));
 	if (array_token == NULL)
 	{
 		free(buffer_copy);
