@@ -86,7 +86,10 @@ int shell(char **av)
 		if (buffer[read - 1] == '\n')
 			buffer[read - 1] = '\0';
 		if (*buffer == '\0' || strcmp(buffer, " ") == 0)
-			return (0);
+		{
+			free(buffer);
+			return (1);
+		}
 		checkCommand(buffer, av);
 	}
 	else
