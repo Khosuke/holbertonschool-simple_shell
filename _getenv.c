@@ -7,21 +7,22 @@
  */
 char *_getenv(const char *name)
 {
-	char *token_env = NULL, *dupEnviron = NULL;
-	int i;
+	char *token_env;
+	int i = 0, len_name = 0, j = 0, len_env = 0;
 
+	len_name = strlen(name);
 	for (i = 0; environ[i]; i++)
 	{
-		dupEnviron = strdup(environ[i]);
-		token_env = strtok(dupEnviron, "=");
-		if (token_env != NULL && strcmp(token_env, name) == 0)
+		len_env = strlen(environ[i]);
+		for (j = 0; j <= len_name; j++)
 		{
-			token_env = strtok(NULL, "=");
-			free(dupEnviron);
-			return (token_env);
+			if (strncmp(name, environ[i], len_name) == 0)
+			{
+				token_env = malloc(sizeof(char) * (len_env - len_name + 1));
+				strcpy(token_env, &environ[i][len_name + 1]);
+				return (token_env);
+			}
 		}
-		free(dupEnviron);
 	}
-	free(token_env);
 	return (NULL);
 }
