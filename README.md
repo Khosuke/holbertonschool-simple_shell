@@ -139,10 +139,11 @@ And you can also see the formated version with the command:
 man ./man_simple_shell
 ```
 
+
 ## Flowchart
 
 This is the flowchart of the general idea of how our Simple Shell is working 
-![Flowchart_Simpleshell](https://github.com/user-attachments/assets/3bc12261-7687-4df2-982b-fddbfb3e35db)
+![Flowchart_SimpleShell (1)](https://github.com/user-attachments/assets/0d8a8081-30cf-4465-94a7-690e87112702)
 
 
 ## Authors
