@@ -15,20 +15,19 @@ int forkexec(char *commandPath, char **cmd)
 	if (child == -1)
 	{
 		perror("Error");
-		return (1);
+		return (-1);
 	}
 	if (child == 0)
 	{
 		if (execve(commandPath, cmd, environ) == -1)
 		{
 			perror("Error");
-			exit(1);
+			exit(-1);
 		}
 	}
 	wait(&status);
 	return (0);
 }
-
 
 /**
  * checkCommand - Handle the user input
@@ -38,9 +37,10 @@ int forkexec(char *commandPath, char **cmd)
  */
 int checkCommand(char *buffer, char **av)
 {
-	char **cmd, *commandPath;
+	char **cmd, *commandPath, *delimiter = " \n";
+	int status = 0;
 
-	cmd = split_string(buffer, " ");
+	cmd = split_string(buffer, delimiter);
 	if (cmd == NULL)
 	{
 		free(buffer);
@@ -58,16 +58,19 @@ int checkCommand(char *buffer, char **av)
 	}
 	if (commandPath != NULL)
 	{
-		forkexec(commandPath, cmd);
+		status = forkexec(commandPath, cmd);
 		if (cmd[0][0] != '/')
 			free(commandPath);
 	}
 	else
+	{
 		fprintf(stderr, "%s: 1: %s: not found\n", *av, *cmd);
+		free_array(cmd);
+		return (127);
+	}
 	free_array(cmd);
-	return (0);
+	return (status);
 }
-
 
 /**
  * shell - execute the command
@@ -79,6 +82,7 @@ int shell(char **av)
 	size_t size = 0;
 	ssize_t read;
 	char *buffer = NULL;
+	int status = 0;
 
 	read = getline(&buffer, &size, stdin);
 	if (read != -1)
@@ -90,7 +94,7 @@ int shell(char **av)
 			free(buffer);
 			return (0);
 		}
-		checkCommand(buffer, av);
+		status = checkCommand(buffer, av);
 	}
 	else
 	{
@@ -99,7 +103,7 @@ int shell(char **av)
 		exit(0);
 	}
 	free(buffer);
-	return (0);
+	return (status);
 }
 
 /**
@@ -127,5 +131,5 @@ int main(int ac, char **av)
 		if (status != 0)
 			break;
 	}
-	return (0);
+	return (status);
 }

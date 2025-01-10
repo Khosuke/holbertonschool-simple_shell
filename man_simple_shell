@@ -1,0 +1,59 @@
+.\" Manpage for simple_shell
+.\" Date: January 2025
+.TH SIMPLE_SHELL 1 "January 2025" "Version 1.0" "User Commands"
+.SH NAME
+simple_shell \- A simple Unix shell implementation
+.SH SYNOPSIS
+.B simple_shell
+[\fIoptions\fR]
+.SH DESCRIPTION
+.B simple_shell
+is a simple command-line shell that allows users to execute shell commands,
+built-in commands, and external programs. It simulates the basic functionality
+of a standard Unix shell with support for command execution, process creation,
+and the handling of basic built-in commands.
+
+This project aims to demonstrate an understanding of how Unix shells work,
+including the use of system calls like \fIfork()\fR, \fIexec()\fR, and \fIwait()\fR,
+as well as memory management and input parsing.
+.PP
+.SH COMMANDS
+The simple shell supports both built-in and external commands.
+Built-in commands include:
+.TP
+.B exit
+Exits the shell.
+.TP
+.B env
+Displays environment variables.
+
+External commands are executed by invoking corresponding executables
+in the system's PATH.
+.SH USAGE EXAMPLES
+To start the simple shell, simply run the executable:
+.PP
+.EX
+$ ./simple_shell
+.EE
+The shell will prompt for user input, and you can enter commands.
+Example usage of simple commands:
+.PP
+.EX
+$ ls
+$ pwd
+$ echo "Hello, World!"
+$ exit
+.EE
+.PP
+To run a single command directly from the shell:
+.PP
+.EX
+$ echo "ls -l" | ./simpleshell
+.EE
+.SH EXIT STATUS
+The shell exits with status code 0 if the command is executed successfully.
+If an error occurs, the exit status will be non-zero.
+.SH SEE ALSO
+bash(1), sh(1), exec(3), fork(2), wait(2)
+.SH AUTHORS
+Written by : Frédéric IGLESIAS MONTERO and Antonin LEBRE
