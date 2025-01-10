@@ -33,7 +33,7 @@ int forkexec(char *commandPath, char **cmd)
  * checkCommand - Handle the user input
  * @buffer: user input
  * @av: Name of the program
- * Return: 1 on Success otherwise 0
+ * Return: The return status of the executed command (0 on Success)
  */
 int checkCommand(char *buffer, char **av)
 {
@@ -75,7 +75,7 @@ int checkCommand(char *buffer, char **av)
 /**
  * shell - execute the command
  * @av: name of the program
- * Return: Always 0 (Success)
+ * Return: The return status of the executed command (0 on Success)
  */
 int shell(char **av)
 {
@@ -110,7 +110,7 @@ int shell(char **av)
  * main - Entry point
  * @ac: argument count
  * @av: name of the program
- * Return: Always 0 (Success)
+ * Return: The return status of the executed command (0 on Success)
  */
 int main(int ac, char **av)
 {
