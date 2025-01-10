@@ -37,7 +37,7 @@ int forkexec(char *commandPath, char **cmd)
  */
 int checkCommand(char *buffer, char **av)
 {
-	char **cmd, *commandPath, *delimiter = " \n";
+	char **cmd, *commandPath, *delimiter = " ";
 	int status = 0;
 
 	cmd = split_string(buffer, delimiter);
@@ -46,7 +46,7 @@ int checkCommand(char *buffer, char **av)
 		free(buffer);
 		return (1);
 	}
-	if (cmd[0][0] != '/')
+	if (cmd[0][0] != '/' && cmd[0][0] != '.')
 		commandPath = _which(cmd[0]);
 	else
 		commandPath = cmd[0];
@@ -122,11 +122,9 @@ int main(int ac, char **av)
 		status = shell(av);
 		return (status);
 	}
-
 	while (1)
 	{
 		printf("Simple Shell $ ");
-		fflush(stdout);
 		status = shell(av);
 		if (status != 0)
 			break;

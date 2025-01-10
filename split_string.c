@@ -15,18 +15,19 @@ char **split_string(char *buffer, char *separator)
 	buffer_copy = strdup(buffer);
 	if (buffer_copy == NULL)
 		return (NULL);
-	while (buffer[i] != '\0')
+	token = strtok(buffer_copy, separator);
+	while (token != NULL)
 	{
-		if (buffer[i] == separator[0])
 			token_count++;
-		i++;
+			token = strtok(NULL, separator);
 	}
-	array_token = malloc((token_count + 2) * sizeof(char *));
+	array_token = malloc((token_count + 1) * sizeof(char *));
 	if (array_token == NULL)
 	{
 		free(buffer_copy);
 		return (NULL);
 	}
+	strcpy(buffer_copy, buffer);
 	token = strtok(buffer_copy, separator);
 	while (token != NULL)
 	{
@@ -38,17 +39,13 @@ char **split_string(char *buffer, char *separator)
 				free(array_token[j - 1]);
 				j--;
 			}
-			free(array_token);
-			free(buffer_copy);
+			free(array_token), free(buffer_copy);
 			return (NULL);
 		}
 		token = strtok(NULL, separator);
 		j++;
 	}
 	array_token[j] = NULL;
-<<<<<<< HEAD
-=======
 	free(buffer_copy);
->>>>>>> main
 	return (array_token);
 }
