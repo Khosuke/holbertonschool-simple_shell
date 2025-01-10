@@ -18,5 +18,6 @@ char *_which(char *commandName);
 int forkexec(char *commandPath, char **cmd);
 int checkCommand(char *buffer, char **av);
 int shell(char **av);
+int _print_env(void);
 
 #endif

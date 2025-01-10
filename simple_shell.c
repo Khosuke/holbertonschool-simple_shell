@@ -56,6 +56,8 @@ int checkCommand(char *buffer, char **av)
 		free_array(cmd);
 		exit(0);
 	}
+	if (strcmp(cmd[0], "env") == 0)
+		_print_env();
 	if (commandPath != NULL)
 	{
 		status = forkexec(commandPath, cmd);

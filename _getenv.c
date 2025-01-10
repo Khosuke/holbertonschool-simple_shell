@@ -26,3 +26,20 @@ char *_getenv(const char *name)
 	}
 	return (NULL);
 }
+
+
+/**
+ * _print_env - print the environment variable
+ * Return: no return
+ */
+int _print_env(void)
+{
+	int i = 0;
+
+	while (environ[i])
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
+	return (0);
+}
