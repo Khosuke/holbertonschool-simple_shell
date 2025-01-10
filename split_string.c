@@ -9,7 +9,7 @@
  */
 char **split_string(char *buffer, char *separator)
 {
-	int i = 0, j = 0, token_count = 0;
+	int j = 0, token_count = 0;
 	char *token, **array_token, *buffer_copy;
 
 	buffer_copy = strdup(buffer);
