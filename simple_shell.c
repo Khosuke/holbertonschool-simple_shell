@@ -126,7 +126,6 @@ int main(int ac, char **av)
 	while (1)
 	{
 		printf("Simple Shell $ ");
-		fflush(stdout);
 		status = shell(av);
 		if (status != 0)
 			break;
