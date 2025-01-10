@@ -18,8 +18,8 @@ char **split_string(char *buffer, char *separator)
 	token = strtok(buffer_copy, separator);
 	while (token != NULL)
 	{
-			token_count++;
-			token = strtok(NULL, separator);
+		token_count++;
+		token = strtok(NULL, separator);
 	}
 	array_token = malloc((token_count + 1) * sizeof(char *));
 	if (array_token == NULL)
