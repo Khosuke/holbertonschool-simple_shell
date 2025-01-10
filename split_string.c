@@ -9,23 +9,25 @@
  */
 char **split_string(char *buffer, char *separator)
 {
-	int i = 0, j = 0, token_count = 1;
-	char *token, **array_token;
+	int i = 0, j = 0, token_count = 0;
+	char *token, **array_token, *buffer_copy;
 
-/* count the number of words in the buffer */
+	buffer_copy = strdup(buffer);
+	if (buffer_copy == NULL)
+		return (NULL);
 	while (buffer[i] != '\0')
 	{
 		if (buffer[i] == separator[0])
 			token_count++;
 		i++;
 	}
-/* memory allocation for array_token */
-	array_token = malloc(1 + token_count * sizeof(char *));
+	array_token = malloc((token_count + 2) * sizeof(char *));
 	if (array_token == NULL)
+	{
+		free(buffer_copy);
 		return (NULL);
-/* attributing words in the buffer as token value */
-	token = strtok(buffer, separator);
-/* attributing each word as a string in array_token */
+	}
+	token = strtok(buffer_copy, separator);
 	while (token != NULL)
 	{
 		array_token[j] = strdup(token);
@@ -37,11 +39,16 @@ char **split_string(char *buffer, char *separator)
 				j--;
 			}
 			free(array_token);
+			free(buffer_copy);
 			return (NULL);
 		}
 		token = strtok(NULL, separator);
 		j++;
 	}
 	array_token[j] = NULL;
+<<<<<<< HEAD
+=======
+	free(buffer_copy);
+>>>>>>> main
 	return (array_token);
 }

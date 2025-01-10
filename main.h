@@ -15,5 +15,8 @@ char **split_string(char *buffer, char *separator);
 void free_array(char **array);
 char *_getenv(const char *name);
 char *_which(char *commandName);
+int forkexec(char *commandPath, char **cmd);
+int checkCommand(char *buffer, char **av);
+int shell(char **av);
 
 #endif
